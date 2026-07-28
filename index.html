@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Boletim — Desenvolvimento de Aplicativos</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E" />
+
+  <link rel="stylesheet" href="src/styles/tokens.css" />
+  <link rel="stylesheet" href="src/styles/base.css" />
+  <link rel="stylesheet" href="src/styles/layout.css" />
+  <link rel="stylesheet" href="src/styles/components.css" />
+  <link rel="stylesheet" href="src/styles/table.css" />
+  <link rel="stylesheet" href="src/styles/auth.css" />
+</head>
+<body>
+  <div class="auth-shell" id="authView">
+    <div class="auth-card">
+      <div>
+        <span class="eyebrow">Boletim de turma</span>
+        <h1 id="authTitle">Entrar</h1>
+      </div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="authTabLogin" type="button">Entrar</button>
+        <button class="auth-tab" id="authTabSignup" type="button">Criar conta</button>
+      </div>
+      <form class="auth-form" id="authForm">
+        <div class="auth-field" id="nomeField" hidden>
+          <label for="authNome">Nome</label>
+          <input id="authNome" type="text" autocomplete="name" placeholder="Seu nome" />
+        </div>
+        <div class="auth-field">
+          <label for="authEmail">E-mail</label>
+          <input id="authEmail" type="email" autocomplete="email" required placeholder="voce@escola.com" />
+        </div>
+        <div class="auth-field">
+          <label for="authPassword">Senha</label>
+          <input id="authPassword" type="password" autocomplete="current-password" required minlength="6" placeholder="mínimo 6 caracteres" />
+        </div>
+        <p class="auth-error" id="authError" hidden></p>
+        <button class="btn btn-primary auth-submit" id="authSubmit" type="submit">Entrar</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="app" id="appView" hidden>
+    <div class="session-bar">
+      <span>Sessão: <strong id="sessionEmail"></strong></span>
+      <button class="btn" id="signOutBtn">Sair</button>
+    </div>
+
+    <header class="topbar">
+      <div class="brand">
+        <span class="eyebrow">Boletim de turma</span>
+        <h1>Desenvolvimento de Aplicativos</h1>
+      </div>
+      <div class="meta-inputs">
+        <div class="meta-field">
+          <label for="turmaInput">Turma</label>
+          <input id="turmaInput" type="text" placeholder="ex. DAM-3A" />
+        </div>
+        <div class="meta-field">
+          <label for="termInput">Período</label>
+          <input id="termInput" type="text" placeholder="ex. 2026/1" />
+        </div>
+      </div>
+    </header>
+
+    <section class="stats" id="statsRow"></section>
+
+    <section class="toolbar">
+      <div class="toolbar-left">
+        <button class="btn btn-primary" id="addStudentBtn">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2.5v9M2.5 7h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Aluno
+        </button>
+        <button class="btn" id="addAssessmentBtn">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2.5v9M2.5 7h9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Avaliação
+        </button>
+        <button class="btn" id="settingsBtn">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 10.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4Z" stroke="currentColor" stroke-width="1.3"/><path d="M13 8.6v-1.2l-1.4-.3a4.3 4.3 0 0 0-.4-1l.8-1.2-.9-.9-1.2.8a4.3 4.3 0 0 0-1-.4L8.6 3H7.4l-.3 1.4a4.3 4.3 0 0 0-1 .4l-1.2-.8-.9.9.8 1.2a4.3 4.3 0 0 0-.4 1L3 7.4v1.2l1.4.3c.1.35.23.68.4 1l-.8 1.2.9.9 1.2-.8c.32.17.65.3 1 .4l.3 1.4h1.2l.3-1.4c.35-.1.68-.23 1-.4l1.2.8.9-.9-.8-1.2c.17-.32.3-.65.4-1l1.4-.3Z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg>
+          Critérios
+        </button>
+      </div>
+      <div class="toolbar-right">
+        <div class="search-wrap">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M13 13l-2.5-2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <input id="searchInput" type="text" placeholder="Buscar aluno…" />
+        </div>
+        <div class="menu-wrap">
+          <button class="btn btn-icon" id="menuBtn" title="Backup e exportação" aria-haspopup="true" aria-expanded="false">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 2v8m0 0L5 7.3M8 10l3-2.7M3 12.5h10v1.2a.7.7 0 0 1-.7.7H3.7a.7.7 0 0 1-.7-.7v-1.2Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="menu" id="exportMenu" hidden>
+            <button id="exportJsonBtn">Exportar backup (.json)</button>
+            <button id="exportCsvBtn">Exportar planilha (.csv)</button>
+            <label for="importInput">Importar backup…</label>
+            <input type="file" id="importInput" accept="application/json" hidden />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="settings-panel" id="settingsPanel" hidden>
+      <div class="field">
+        <label for="passThreshold">Média mínima para aprovação</label>
+        <input type="number" id="passThreshold" min="0" max="10" step="0.1" />
+      </div>
+      <div class="field">
+        <label for="recoveryThreshold">Média mínima para recuperação</label>
+        <input type="number" id="recoveryThreshold" min="0" max="10" step="0.1" />
+        <span class="hint">Abaixo disso, o aluno é considerado reprovado direto.</span>
+      </div>
+      <div class="settings-legend">
+        <span class="legend-item"><span class="legend-dot" style="background:var(--good)"></span>Aprovado</span>
+        <span class="legend-item"><span class="legend-dot" style="background:var(--warn)"></span>Recuperação</span>
+        <span class="legend-item"><span class="legend-dot" style="background:var(--bad)"></span>Reprovado</span>
+      </div>
+    </section>
+
+    <section class="table-card">
+      <div class="table-scroll">
+        <table id="gradesTable">
+          <thead><tr id="headRow"></tr></thead>
+          <tbody id="bodyRows"></tbody>
+          <tfoot><tr><td id="addRowCell" colspan="1"></td></tr></tfoot>
+        </table>
+      </div>
+      <div class="empty-state" id="emptyState">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 3.5h9l3 3v10a.9.9 0 0 1-.9.9H4a.9.9 0 0 1-.9-.9V4.4A.9.9 0 0 1 4 3.5Z" stroke="currentColor" stroke-width="1.4"/><path d="M7 10.5h6M7 13.5h4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Nenhum aluno cadastrado</h3>
+        <p>Adicione os alunos da turma e as avaliações (provas, trabalhos, projetos) para começar a lançar as notas.</p>
+        <div class="actions">
+          <button class="btn btn-primary" id="emptyAddStudentBtn">+ Adicionar aluno</button>
+          <button class="btn" id="emptyAddAssessmentBtn">+ Adicionar avaliação</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="distribution" id="distributionCard" hidden>
+      <div class="distribution-head">
+        <h2>Distribuição da turma</h2>
+        <span id="distMeta"></span>
+      </div>
+      <div class="dist-bars" id="distBars"></div>
+    </section>
+
+    <p class="foot-note">Os dados ficam salvos <strong>apenas neste navegador</strong>. Use <strong>Exportar backup</strong> no menu ↗ para não perder as notas ao trocar de dispositivo.</p>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script type="module" src="src/scripts/main.js"></script>
+</body>
+</html>

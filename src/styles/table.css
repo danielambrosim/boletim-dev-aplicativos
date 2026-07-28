@@ -1,0 +1,103 @@
+/* Tabela de notas: cabeçalho de avaliações, linhas de aluno, células
+   editáveis. Regras horizontais apenas — sem grade vertical pesada. */
+
+.table-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.table-scroll { overflow-x: auto; }
+
+table { border-collapse: collapse; width: 100%; min-width: 640px; }
+
+thead th {
+  position: sticky; top: 0; background: var(--card-2);
+  border-bottom: 1px solid var(--border);
+  font-weight: 600; font-size: 12px; color: var(--ink-soft);
+  text-align: left; padding: var(--sp-3) var(--sp-3); white-space: nowrap;
+}
+th.col-student { min-width: 190px; position: sticky; left: 0; z-index: 5; background: var(--card-2); }
+td.col-student {
+  position: sticky; left: 0; background: var(--card); z-index: 3;
+  box-shadow: 1px 0 0 var(--border-soft);
+}
+tbody tr:hover td.col-student { background: var(--card-2); }
+th.col-assessment { min-width: 130px; }
+th.col-media { min-width: 90px; }
+th.col-status { min-width: 148px; }
+th.col-actions { width: 36px; }
+
+/* Cabeçalho de avaliação — nome, peso e remoção numa única linha compacta */
+.assessment-head { display: flex; align-items: center; gap: 5px; }
+.assessment-name-input {
+  font: inherit; font-size: 12.5px; font-weight: 700; color: var(--ink);
+  background: transparent; border: none; border-radius: 5px; padding: 3px 4px; width: 68px;
+}
+.assessment-name-input:focus-visible { outline: 2px solid var(--accent); background: var(--card); }
+.weight-badge {
+  display: inline-flex; align-items: center; gap: 2px;
+  font-family: var(--mono); font-size: 10.5px; color: var(--ink-faint); font-weight: 500;
+}
+.weight-badge input {
+  font: inherit; font-family: var(--mono); font-size: 10.5px; width: 30px; color: var(--ink-soft);
+  background: var(--card-2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 3px;
+}
+.col-del-btn {
+  opacity: 0; border: none; background: transparent; color: var(--ink-faint); cursor: pointer;
+  padding: 2px; border-radius: 4px; line-height: 0; margin-left: auto;
+}
+th.col-assessment:hover .col-del-btn { opacity: 1; }
+.col-del-btn:hover { color: var(--bad); background: var(--bad-soft); }
+
+tbody td { border-bottom: 1px solid var(--border-soft); padding: 7px var(--sp-3); }
+tbody tr:last-child td { border-bottom: none; }
+
+.name-input {
+  font: inherit; font-size: 13.5px; font-weight: 600; color: var(--ink);
+  background: transparent; border: none; border-radius: 5px; padding: 7px 6px; width: 100%;
+}
+.name-input:focus-visible { outline: 2px solid var(--accent); background: var(--card-2); }
+.name-input::placeholder { color: var(--ink-faint); font-weight: 500; }
+
+.grade-input {
+  font: inherit; font-family: var(--mono); font-size: 13.5px; font-variant-numeric: tabular-nums;
+  color: var(--ink); text-align: center; width: 56px;
+  background: var(--card-2); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 7px 4px;
+}
+.grade-input:focus-visible { outline: 2px solid var(--accent); border-color: var(--accent); }
+.grade-input.empty { color: var(--ink-faint); }
+.grade-input.low { color: var(--bad); border-color: color-mix(in srgb, var(--bad) 40%, var(--border)); }
+
+.media-cell { font-family: var(--mono); font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.media-cell .partial {
+  display: block; font-family: var(--sans); font-size: 10px; font-weight: 600; color: var(--ink-faint);
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.media-cell.good { color: var(--good); }
+.media-cell.warn { color: var(--warn); }
+.media-cell.bad { color: var(--bad); }
+.media-cell.neutral { color: var(--ink-faint); }
+
+.row-del-btn {
+  opacity: 0; border: none; background: transparent; color: var(--ink-faint); cursor: pointer;
+  padding: 5px; border-radius: var(--r-sm); line-height: 0;
+}
+tbody tr:hover .row-del-btn { opacity: 1; }
+.row-del-btn:hover { color: var(--bad); background: var(--bad-soft); }
+
+.add-assessment-cell { padding: 0; }
+.add-col-btn {
+  height: 100%; width: 100%; min-height: 48px; border: none; background: transparent;
+  color: var(--ink-faint); font-size: 18px; cursor: pointer;
+}
+.add-col-btn:hover { color: var(--accent); background: var(--card-2); }
+
+tfoot td { padding: 4px var(--sp-3) 10px; }
+.add-row-btn {
+  display: flex; align-items: center; gap: 6px; width: 100%;
+  padding: 9px 6px; border: none; background: transparent; border-radius: var(--r-sm);
+  color: var(--ink-faint); font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.add-row-btn:hover { color: var(--accent); background: var(--card-2); }

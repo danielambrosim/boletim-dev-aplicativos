@@ -1,0 +1,142 @@
+/* Componentes reutilizáveis: campos, botões, cards de estatística, pills,
+   menu de exportação, toast, estado vazio, barras de distribuição. */
+
+/* Campos do cabeçalho (turma / período) */
+.meta-field { display: flex; flex-direction: column; gap: 3px; }
+.meta-field label {
+  font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.meta-field input {
+  font: inherit; font-size: 13.5px; font-weight: 600; color: var(--ink);
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--r-sm);
+  padding: 7px 10px; width: 150px;
+}
+.meta-field input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* Cards de estatística — flat, sem sombra pesada */
+.tile {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: var(--sp-3) var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.tile-label {
+  font-size: 10.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.tile-value {
+  font-family: var(--mono);
+  font-size: 23px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+.tile.good .tile-value { color: var(--good); }
+.tile.warn .tile-value { color: var(--warn); }
+.tile.bad .tile-value { color: var(--bad); }
+.tile.accent .tile-value { color: var(--accent); }
+
+/* Botões */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 600;
+  padding: 8px 13px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--ink);
+  transition: border-color .12s ease, background .12s ease;
+  white-space: nowrap;
+}
+.btn:hover { border-color: var(--accent); }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+.btn-icon { padding: 8px; line-height: 0; }
+
+/* Busca */
+.search-wrap { position: relative; }
+.search-wrap input {
+  font: inherit; font-size: 13px;
+  padding: 8px 12px 8px 30px;
+  border-radius: var(--r-sm); border: 1px solid var(--border);
+  background: var(--card); color: var(--ink);
+  width: 190px;
+}
+.search-wrap input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.search-wrap svg { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); opacity: .5; }
+
+/* Menu de exportação */
+.menu-wrap { position: relative; }
+.menu {
+  position: absolute; right: 0; top: calc(100% + 6px);
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--r-md);
+  box-shadow: var(--shadow-raised); padding: 6px; display: flex; flex-direction: column; gap: 2px;
+  min-width: 190px; z-index: 20;
+}
+.menu button, .menu label {
+  text-align: left; font-size: 13px; font-weight: 500; padding: 8px 10px; border-radius: var(--r-sm);
+  border: none; background: transparent; color: var(--ink); cursor: pointer; display: block;
+}
+.menu button:hover, .menu label:hover { background: var(--card-2); }
+
+/* Painel de critérios — campos internos */
+.settings-panel .field { display: flex; flex-direction: column; gap: 5px; }
+.settings-panel .field label { font-size: 11.5px; font-weight: 600; color: var(--ink-soft); }
+.settings-panel .field .hint { font-size: 11px; color: var(--ink-faint); max-width: 220px; }
+.settings-panel input[type="number"] {
+  font: inherit; font-family: var(--mono); font-size: 13.5px; width: 64px;
+  padding: 6px 9px; border-radius: var(--r-sm); border: 1px solid var(--border); background: var(--card-2); color: var(--ink);
+}
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-soft); }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* Pills de situação */
+.pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11.5px; font-weight: 700; letter-spacing: .01em;
+  padding: 4px 9px; border-radius: var(--r-pill);
+}
+.pill svg { flex-shrink: 0; }
+.pill.good { background: var(--good-soft); color: var(--good); }
+.pill.warn { background: var(--warn-soft); color: var(--warn); }
+.pill.bad { background: var(--bad-soft); color: var(--bad); }
+.pill.neutral { background: var(--neutral-soft); color: var(--neutral); }
+
+/* Estado vazio */
+.empty-state {
+  display: none;
+  flex-direction: column; align-items: center; text-align: center;
+  gap: 10px; padding: 56px var(--sp-5);
+}
+.empty-state.show { display: flex; }
+.empty-state .icon {
+  width: 44px; height: 44px; border-radius: var(--r-md); background: var(--accent-soft); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+}
+.empty-state h3 { font-size: 16px; font-weight: 700; }
+.empty-state p { font-size: 13.5px; color: var(--ink-soft); max-width: 340px; }
+.empty-state .actions { display: flex; gap: 8px; margin-top: 6px; }
+
+/* Barras de distribuição */
+.dist-bars { display: flex; flex-direction: column; gap: var(--sp-2); }
+.dist-row { display: grid; grid-template-columns: 96px 1fr 34px; align-items: center; gap: var(--sp-3); }
+.dist-row .dlabel { font-size: 12px; font-weight: 600; color: var(--ink-soft); }
+.dist-track { height: 8px; border-radius: var(--r-pill); background: var(--card-2); overflow: hidden; border: 1px solid var(--border-soft); }
+.dist-fill { height: 100%; border-radius: var(--r-pill); transition: width .25s ease; }
+.dist-count { font-family: var(--mono); font-size: 12px; text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(8px);
+  background: var(--ink); color: var(--paper); font-size: 13px; font-weight: 600;
+  padding: 10px 16px; border-radius: var(--r-sm); box-shadow: var(--shadow-raised);
+  opacity: 0; pointer-events: none; transition: opacity .18s ease, transform .18s ease;
+  z-index: 50; max-width: 320px; text-align: center;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }

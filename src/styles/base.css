@@ -1,0 +1,25 @@
+/* Reset e fundamentos tipográficos. */
+
+* { box-sizing: border-box; }
+
+html, body { background: var(--paper); }
+
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p { margin: 0; }
+
+::selection { background: var(--accent-soft); color: var(--accent-strong); }
+
+button { font: inherit; cursor: pointer; }
+
+[hidden] { display: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
